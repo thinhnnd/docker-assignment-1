@@ -14,21 +14,18 @@
 # test again that it works at http://localhost
 
 
-# Instructions from the app developer
-# - you should use the 'node' official image, with the alpine 6.x branch (node:6-alpine)
-  #  yes this is a 2-year old image of node, but all official images are always
-  #  available on Docker Hub forever, to ensure even old apps still work.
-  #  It is common to still need to deploy old app versions, even years later.
-# - this app listens on port 3000, but the container should launch on port 80
-  #  so it will respond to http://localhost:80 on your computer
+# Instructions from the app developer // Làm theo chỉ dẫn này nhé 
+# - you should use the 'node' official image  // Sử dụng image node phiên bản tùy chọn tốt nhât từ bản 10. Lên docker hub để tìm
+# - this app listens on port 3000, but the container should launch on port 80 // nhớ expose port 3000 ra
+#  so it will respond to http://localhost:80 on your computer
 # - then it should use alpine package manager to install tini: 'apk add --update tini'
-# - then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app'
-# - Node uses a "package manager", so it needs to copy in package.json file
-# - then it needs to run 'npm install' to install dependencies from that file
-# - to keep it clean and small, run 'npm cache clean --force' after above
-# - then it needs to copy in all files from current directory
-# - then it needs to start container with command '/sbin/tini -- node ./bin/www'
-# - in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands
+# - then it should create directory /usr/src/app for app files with 'mkdir -p /usr/src/app' // Code sẽ được copy vào thư mục này
+# - Node uses a "package manager", so it needs to copy in package.json file  // Copy package.json
+# - then it needs to run 'npm install' to install dependencies from that file // Cài gói thông qua npm 
+# - to keep it clean and small, run 'npm cache clean --force' after above // Sau khi cài xong npm để giảm thiểu dung lượng, nên chạy lệnh 'npm cache clean --force'
+# - then it needs to copy in all files from current directory // Copy tất cả các file vào directory đang làm việc hiện tại
+# - then it needs to start container with command 'node ./bin/www' // Container cần phải được start với command này
+# - in the end you should be using FROM, RUN, WORKDIR, COPY, EXPOSE, and CMD commands // Kết thúc Dockerfile phải có đầy đủ các lệnh trên
 
 # Bonus Extra Credit
 # this will not have you setting up a complete image useful for local development, test, and prod
